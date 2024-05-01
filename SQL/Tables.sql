@@ -66,4 +66,5 @@ CREATE TABLE Content (
     FilePath VARCHAR(MAX),
     FileExtension VARCHAR(MAX),
 	DateAdded datetime,
+	BlobUrl varchar(MAX)
 );

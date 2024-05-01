@@ -291,10 +291,11 @@ CREATE OR ALTER PROCEDURE [dbo].[ContentInsert] (
 	@FileExtension varchar(MAX),
 	@FileName varchar(MAX),
 	@FileSize int,
-	@DateAdded datetime
+	@DateAdded datetime,
+	@BlobUrl varchar(MAX)
 ) AS
 BEGIN
-	INSERT INTO Content (Title, [Description], Artist, FileName, FilePath, FileExtension, FileSize, DateAdded)
-	VALUES (@Title, @Description, @Artist, @FileName, @FilePath, @FileExtension, @FileSize, @DateAdded)
+	INSERT INTO Content (Title, [Description], Artist, FileName, FilePath, FileExtension, FileSize, DateAdded, BlobUrl)
+	VALUES (@Title, @Description, @Artist, @FileName, @FilePath, @FileExtension, @FileSize, @DateAdded, @BlobUrl)
 END
 GO

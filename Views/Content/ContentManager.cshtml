@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ContentModel>
+
+@{
+    ViewBag.Title = "Content Manager";
+}
+
+<h2>Content Manager</h2>
+
+<h4>Total Items: @Model.Count()</h4>
+
+<p>
+    <u>@Html.ActionLink("Create New Record", "ContentAdd", "Content")</u>
+</p>
+<p>
+    <u>@Html.ActionLink("All Content", "ContentViewAll", "Content")</u>
+</p>
+<p>
+    <u>@Html.ActionLink("Content Storage", "Storage", "Content")</u>
+</p>
+
+<table align="left" class="table table-condensed">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model.OrderBy(i => i.Description))
+    {
+        <tr>
+            <td>
+                @if (item.FileExtension == ".jpg" || item.FileExtension == ".jpeg" || item.FileExtension == ".gif" || item.FileExtension == ".png")
+                {
+                    <img width="100" height="100" src="~/contentdump/@Url.Content(item.FileName)">
+                }
+                @if (item.FileExtension == ".mp4" || item.FileExtension == ".avi" || item.FileExtension == ".mov")
+                {
+                    <video width="150" height="150" controls>
+                        <source src="~/contentdump/@Url.Content(item.FileName)" />
+                    </video>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ContentViewById", new { id = item.ContentId })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ContentEdit", new { id = item.ContentId })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "ContentDelete", new { id = item.ContentId })
+            </td>
+        </tr>
+    }
+</table>

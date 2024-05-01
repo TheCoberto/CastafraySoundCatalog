@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ImageModel>
+
+@{
+    ViewBag.Title = "Image Manager";
+}
+
+<h2>Image Manager</h2>
+
+<h4>Total Images: @Model.Count()</h4>
+
+<p>
+    <u>@Html.ActionLink("Create New Record", "ImageAdd", "Images")</u>
+</p>
+
+<table align="left" class="table table-condensed">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model.OrderBy(i => i.Description))
+    {
+        <tr>
+            <td>
+                <img width="100" height="100" src="~/image/@Url.Content(item.Title)">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ImageViewById", new { id = item.ImageId })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ImageEdit", new { id = item.ImageId }) 
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "ImageDelete", new { id = item.ImageId })
+
+            </td>
+        </tr>
+    }
+</table>

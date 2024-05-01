@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ContentModel>
+
+@{
+    ViewBag.Title = "All Content";
+}
+
+<h2>All Content</h2>
+
+<p>
+    <u>@Html.ActionLink("Create New Record", "ContentAdd", "Content")</u>
+</p>
+<p>
+    <u>@Html.ActionLink("Shuffle", "ContentViewAllShuffled", "Content")</u>
+</p>
+<p>
+    <u>@Html.ActionLink("Content Manager", "ContentManager", "Content")</u>
+</p>
+<center>
+    @foreach (var content in Model.OrderByDescending(x => x.ContentId))
+    {
+        if (content.FileExtension == ".jpg" || content.FileExtension == ".jpeg" || content.FileExtension == ".png" || content.FileExtension == ".gif")
+        {
+            <h4>@content.Description</h4>
+            <img width="650" height="650" src="~/contentdump/@Url.Content(content.FileName)">
+            <br />
+            <hr />
+        }
+        if (content.FileExtension == ".mov" || content.FileExtension == ".avi" || content.FileExtension == ".mp4")
+        {
+            <h4>@content.Description</h4>
+            <video width="500" height="400" controls>
+                <source src="~/contentdump/@Url.Content(content.FileName)" />
+            </video>
+            <br />
+            <hr />
+        }
+    }
+</center>

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ImageModel>
+
+@{
+    ViewBag.Title = "All Images";
+}
+
+<h2>All Images</h2>
+
+<p>
+    <u>@Html.ActionLink("Create New Record", "ImageAdd", "Images")</u>
+</p>
+<p>
+    <u>@Html.ActionLink("Shuffle", "ImageViewAllShuffled", "Images")</u>
+</p>
+
+<center>
+    @foreach (var img in Model.OrderByDescending(x => x.ImageId))
+    {
+        <h4>@img.Description</h4>
+        <img width="650" height="650" src="~/image/@Url.Content(img.Title)">
+        <br />
+        <hr />
+    }
+</center>

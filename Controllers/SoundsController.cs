@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static CastafraySoundCatalog.Globals;
+using static CastafraySoundCatalog.Helpers;
 
 namespace CastafraySoundCatalog.Controllers
 {
@@ -69,11 +71,10 @@ namespace CastafraySoundCatalog.Controllers
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string fileExt = Path.GetExtension(fileName);
-                if (fileExt == ".wav" || fileExt == ".mp3" || fileExt == ".ogg")
+                if (IsSound(fileExt))
                 {
                     string filePath = Path.Combine(Server.MapPath("~/sound"), fileName);
-                    string mainConn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                    SqlConnection sqlconn = new SqlConnection(mainConn);
+                    SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("SoundInsert", sqlconn);
                     sqlcomm.CommandType = CommandType.StoredProcedure;
                     sqlconn.Open();

@@ -11,12 +11,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using Azure.Storage.Blobs;
+using static CastafraySoundCatalog.Globals;
+using static CastafraySoundCatalog.Helpers;
 
 namespace CastafraySoundCatalog.Controllers
 {
     public class ContentController : Controller
     {
-        public string[] SupportedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".mp4", ".mov", ".avi", ".webm", ".heic" };
         public Random rng = new Random();
 
         public ActionResult ContentViewAll()
@@ -66,18 +67,15 @@ namespace CastafraySoundCatalog.Controllers
             {
                 return RedirectToAction("UploadFailed");
             }
-
-            
             else
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string fileExt = Path.GetExtension(fileName).ToLower();
 
-                if (fileExt == ".png" || fileExt == ".jpg" || fileExt == ".gif" || fileExt == ".jpeg" || fileExt == ".mov" || fileExt == ".mp4" || fileExt == ".avi")
+                if (IsValidFileType(fileExt))
                 {
                     string filePath = Path.Combine(Server.MapPath("~/contentdump"), fileName);
-                    string mainConn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                    SqlConnection sqlconn = new SqlConnection(mainConn);
+                    SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("ContentInsert", sqlconn);
                     sqlcomm.CommandType = CommandType.StoredProcedure;
                     sqlconn.Open();
@@ -129,7 +127,6 @@ namespace CastafraySoundCatalog.Controllers
         [HttpPost]
         public ActionResult ContentEdit(ContentModel contentModel)
         {
-
             DynamicParameters param = new DynamicParameters();
             param.Add("@ContentId", contentModel.ContentId);
             param.Add("@Description", contentModel.Description);

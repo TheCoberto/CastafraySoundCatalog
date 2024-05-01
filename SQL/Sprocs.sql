@@ -1,16 +1,15 @@
 CREATE PROCEDURE ImageSelectAll AS
 BEGIN
-	SELECT ImageId, Title, Artist, [Description], FileSize, FilePath
+	SELECT *
 	FROM Images
 END
-
 GO
 
 CREATE PROCEDURE ImageSelectById (
 	@ImageId int
 ) AS
 BEGIN
-	SELECT ImageId, Title, Artist, [Description], FileSize, FilePath
+	SELECT *
 	FROM Images
 	WHERE ImageId = @ImageId
 END
@@ -21,13 +20,11 @@ CREATE PROCEDURE ImageInsert (
 	@Description varchar(MAX),
 	@FilePath nvarchar(MAX),
 	@FileExt varchar(MAX)
-
 ) AS
 BEGIN
 	INSERT INTO Images (Title, [Description], FilePath, FileExt)
 	VALUES (@Title, @Description, @FilePath, @FileExt)
 END
-
 GO
 
 CREATE PROCEDURE ImageDeleteById (
@@ -54,17 +51,16 @@ GO
 
 CREATE PROCEDURE VideoSelectAll AS
 BEGIN
-	SELECT VideoId, Title, Artist, [Description], FileSize, FilePath
+	SELECT *
 	FROM Videos
 END
-
 GO
 
 CREATE PROCEDURE VideoSelectById (
 	@VideoId int
 ) AS
 BEGIN
-	SELECT VideoId, Title, Artist, [Description], FileSize, FilePath
+	SELECT *
 	FROM Videos
 	WHERE VideoId = @VideoId
 END
@@ -74,13 +70,11 @@ CREATE PROCEDURE VideoInsert (
 	@Title varchar(MAX),
 	@FilePath nvarchar(MAX),
 	@FileExt varchar(MAX)
-
 ) AS
 BEGIN
 	INSERT INTO Videos (Title, FilePath, FileExt)
 	VALUES (@Title, @FilePath, @FileExt)
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[SoundDeleteById] (
@@ -103,14 +97,13 @@ BEGIN
 	SET Title = @Title, Artist = @Artist
 	WHERE @SoundId = SoundId
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[SoundSelectById] (
 	@SoundId int
 ) AS
 BEGIN
-	SELECT SoundId, Title, Artist, FileName, FileExtension, FilePath
+	SELECT *
 	FROM Sounds
 	WHERE SoundId = @SoundId
 END
@@ -118,10 +111,9 @@ GO
 
 CREATE PROCEDURE [dbo].[SoundSelectAll] AS
 BEGIN
-	SELECT SoundId, Title, Artist, FileName, FileExtension, FilePath
+	SELECT *
 	FROM Sounds
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[SoundInsert] (
@@ -130,13 +122,11 @@ CREATE PROCEDURE [dbo].[SoundInsert] (
 	@FilePath nvarchar(MAX),
 	@FileExtension varchar(MAX),
 	@FileName varchar(MAX)
-
 ) AS
 BEGIN
 	INSERT INTO Sounds (Title, Artist, FileName, FilePath, FileExtension)
 	VALUES (@Title, @Artist, @FileName, @FilePath, @FileExtension)
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[ContentDeleteById] (
@@ -159,14 +149,13 @@ BEGIN
 	SET Title = @Title, Artist = @Artist
 	WHERE @ContentId = ContentId
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[ContentSelectById] (
 	@ContentId int
 ) AS
 BEGIN
-	SELECT ContentId, Title, Artist, FileName, FileExtension, FilePath
+	SELECT *
 	FROM Content
 	WHERE ContentId = @ContentId
 END
@@ -177,7 +166,6 @@ BEGIN
 	SELECT *
 	FROM Content
 END
-
 GO
 
 CREATE PROCEDURE [dbo].[ContentInsert] (
@@ -187,11 +175,9 @@ CREATE PROCEDURE [dbo].[ContentInsert] (
 	@FilePath nvarchar(MAX),
 	@FileExtension varchar(MAX),
 	@FileName varchar(MAX)
-
 ) AS
 BEGIN
 	INSERT INTO Content (Title, [Description], Artist, FileName, FilePath, FileExtension)
 	VALUES (@Title, @Description, @Artist, @FileName, @FilePath, @FileExtension)
 END
-
 GO

@@ -203,6 +203,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Models\DapperORM.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ContentModel.cs" />

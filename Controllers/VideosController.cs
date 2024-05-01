@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static CastafraySoundCatalog.Globals;
+using static CastafraySoundCatalog.Helpers;
 
 namespace CastafraySoundCatalog.Controllers
 {
@@ -56,11 +58,10 @@ namespace CastafraySoundCatalog.Controllers
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string fileExt = Path.GetExtension(fileName).ToLower();
-                if (fileExt == ".mp4" || fileExt == ".avi" || fileExt == ".mov")
+                if (IsVideo(fileExt))
                 {
                     string filePath = Path.Combine(Server.MapPath("~/video"), fileName);
-                    string mainConn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                    SqlConnection sqlconn = new SqlConnection(mainConn);
+                    SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("VideoInsert", sqlconn);
                     sqlcomm.CommandType = CommandType.StoredProcedure;
                     sqlconn.Open();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 
 namespace CastafraySoundCatalog.Models
@@ -15,7 +13,6 @@ namespace CastafraySoundCatalog.Models
         public Nullable<int> FileSize { get; set; }
         public string FilePath { get; set; }
         public HttpPostedFileBase Sound { get; set; }
-
         public string SoundPath { get; set; }
         public string SoundExt { get; set; }
         public string FileName { get; set; }

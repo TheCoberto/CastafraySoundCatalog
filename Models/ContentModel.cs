@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace CastafraySoundCatalog.Models
 {
@@ -13,5 +10,6 @@ namespace CastafraySoundCatalog.Models
         public string FilePath { get; set; }
         public HttpPostedFileBase Image { get; set; }
         public string FileExtension { get; set; }
+        public string BlobUrl { get; set; }
     }
 }

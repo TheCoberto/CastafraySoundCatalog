@@ -1,18 +1,15 @@
 ﻿using CastafraySoundCatalog.Models;
 using Dapper;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Collections;
-using Azure.Storage.Blobs;
 using static CastafraySoundCatalog.Globals;
 using static CastafraySoundCatalog.Helpers;
+using CastafraySoundCatalog.Services;
 
 namespace CastafraySoundCatalog.Controllers
 {
@@ -74,6 +71,8 @@ namespace CastafraySoundCatalog.Controllers
 
                 if (IsValidFileType(fileExt))
                 {
+                    var blobService = new AzureBlobService();
+                    var blobUrl = blobService.UploadFile(file);
                     int fileSize = file.ContentLength;
                     DateTime dateAdded = DateTime.Now;
                     string filePath = Path.Combine(Server.MapPath("~/contentdump"), fileName);
@@ -81,11 +80,6 @@ namespace CastafraySoundCatalog.Controllers
                     SqlCommand sqlcomm = new SqlCommand("ContentInsert", sqlconn);
                     sqlcomm.CommandType = CommandType.StoredProcedure;
                     sqlconn.Open();
-                    //BlobServiceClient blobServiceClient = new BlobServiceClient(mainConn);
-                    //BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-                    //FileStream uploadFileStream = File.OpenRead(filePath);
-                    //containerClient.UploadBlob(blobName, uploadFileStream);
-                    //uploadFileStream.Close();
                     sqlcomm.Parameters.AddWithValue("@FileName", fileName);
                     sqlcomm.Parameters.AddWithValue("@Title", fileName); // update this
                     sqlcomm.Parameters.AddWithValue("@Artist", fileName); // update this
@@ -94,6 +88,7 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
                     sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
                     sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
+                    sqlcomm.Parameters.AddWithValue("@BlobUrl", blobUrl);
                     sqlcomm.ExecuteNonQuery();
                     file.SaveAs(filePath);
                     sqlconn.Close();

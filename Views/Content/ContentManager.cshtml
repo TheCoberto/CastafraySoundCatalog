@@ -42,12 +42,12 @@
             <td>
                 @if (item.FileExtension == ".jpg" || item.FileExtension == ".jpeg" || item.FileExtension == ".gif" || item.FileExtension == ".png")
                 {
-                    <img width="100" height="100" src="~/contentdump/@Url.Content(item.FileName)">
+                    <img width="100" height="100" src="@Url.Content(item.BlobUrl)">
                 }
                 @if (item.FileExtension == ".mp4" || item.FileExtension == ".avi" || item.FileExtension == ".mov")
                 {
                     <video width="150" height="150" controls>
-                        <source src="~/contentdump/@Url.Content(item.FileName)" />
+                        <source src="@Url.Content(item.BlobUrl)" />
                     </video>
                 }
             </td>

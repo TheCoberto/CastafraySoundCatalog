@@ -29,7 +29,7 @@
         if (content.FileExtension == ".jpg" || content.FileExtension == ".jpeg" || content.FileExtension == ".png" || content.FileExtension == ".gif")
         {
             <h4>@content.Description</h4>
-            <img width="650" height="650" src="~/contentdump/@Url.Content(content.FileName)">
+            <img width="650" height="650" src="@Url.Content(content.BlobUrl)">
             <br />
             <hr />
         }
@@ -37,7 +37,7 @@
         {
             <h4>@content.Description</h4>
             <video width="500" height="400" controls>
-                <source src="~/contentdump/@Url.Content(content.FileName)" />
+                <source src="@Url.Content(content.BlobUrl)" />
             </video>
             <br />
             <hr />

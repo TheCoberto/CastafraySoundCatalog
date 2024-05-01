@@ -1,14 +1,12 @@
 ﻿using CastafraySoundCatalog.Models;
 using Dapper;
 using System;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Azure.Storage.Blobs;
 using static CastafraySoundCatalog.Globals;
 using static CastafraySoundCatalog.Helpers;
 

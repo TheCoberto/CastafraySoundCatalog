@@ -60,6 +60,8 @@ namespace CastafraySoundCatalog.Controllers
                 string fileExt = Path.GetExtension(fileName).ToLower();
                 if (IsVideo(fileExt))
                 {
+                    int fileSize = file.ContentLength;
+                    DateTime dateAdded = DateTime.Now;
                     string filePath = Path.Combine(Server.MapPath("~/video"), fileName);
                     SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("VideoInsert", sqlconn);
@@ -69,6 +71,8 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@Description", description);
                     sqlcomm.Parameters.AddWithValue("@FileExt", fileExt);
                     sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
+                    sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
+                    sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.ExecuteNonQuery();
                     file.SaveAs(filePath);
                     sqlconn.Close();

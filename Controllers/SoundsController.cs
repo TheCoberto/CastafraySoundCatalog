@@ -16,7 +16,6 @@ namespace CastafraySoundCatalog.Controllers
 {
     public class SoundsController : Controller
     {
-        // GET: Sounds
         public ActionResult SoundManager()
         {
             return View(DapperORM.ReturnList<SoundModel>("SoundSelectAll"));
@@ -53,7 +52,6 @@ namespace CastafraySoundCatalog.Controllers
             return RedirectToAction("SoundManager");
         }
 
-
         public ActionResult Delete(int id)
         {
             DynamicParameters param = new DynamicParameters();
@@ -61,8 +59,6 @@ namespace CastafraySoundCatalog.Controllers
             DapperORM.ExecuteWithoutReturn("SoundDeleteById", param);
             return RedirectToAction("SoundManager");
         }
-
-
 
         [HttpPost]
         public ActionResult SoundAdd(HttpPostedFileBase file, string title, string artist)
@@ -73,6 +69,8 @@ namespace CastafraySoundCatalog.Controllers
                 string fileExt = Path.GetExtension(fileName);
                 if (IsSound(fileExt))
                 {
+                    int fileSize = file.ContentLength;
+                    DateTime dateAdded = DateTime.Now;
                     string filePath = Path.Combine(Server.MapPath("~/sound"), fileName);
                     SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("SoundInsert", sqlconn);
@@ -83,6 +81,8 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@FileName", fileName);
                     sqlcomm.Parameters.AddWithValue("@FileExtension", fileExt);
                     sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
+                    sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
+                    sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.ExecuteNonQuery();
                     file.SaveAs(filePath);
                     sqlconn.Close();

@@ -74,6 +74,8 @@ namespace CastafraySoundCatalog.Controllers
 
                 if (IsValidFileType(fileExt))
                 {
+                    int fileSize = file.ContentLength;
+                    DateTime dateAdded = DateTime.Now;
                     string filePath = Path.Combine(Server.MapPath("~/contentdump"), fileName);
                     SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("ContentInsert", sqlconn);
@@ -90,8 +92,8 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@Description", description);
                     sqlcomm.Parameters.AddWithValue("@FileExtension", fileExt);
                     sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
-
-                    //sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
+                    sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
+                    sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.ExecuteNonQuery();
                     file.SaveAs(filePath);
                     sqlconn.Close();

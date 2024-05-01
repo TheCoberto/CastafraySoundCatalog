@@ -1,3 +1,5 @@
+USE Content
+
 TRUNCATE TABLE Images
 TRUNCATE TABLE Videos
 TRUNCATE TABLE Sounds

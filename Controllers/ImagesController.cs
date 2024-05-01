@@ -56,12 +56,13 @@ namespace CastafraySoundCatalog.Controllers
             }
             else
             {
-                DateTime dateAdded = DateTime.Now;
                 string fileName = Path.GetFileName(file.FileName);
                 string fileExt = Path.GetExtension(fileName).ToLower();
 
                 if (IsImage(fileExt))
                 {
+                    int fileSize = file.ContentLength;
+                    DateTime dateAdded = DateTime.Now;
                     string filePath = Path.Combine(Server.MapPath("~/image"), fileName);
                     SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("ImageInsert", sqlconn);
@@ -71,6 +72,8 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@Description", description);
                     sqlcomm.Parameters.AddWithValue("@FileExt", fileExt);
                     sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
+                    sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
+                    sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.ExecuteNonQuery();
                     file.SaveAs(filePath);
                     sqlconn.Close();

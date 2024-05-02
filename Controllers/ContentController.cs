@@ -153,6 +153,7 @@ namespace CastafraySoundCatalog.Controllers
             param.Add("@Title", contentModel.Title);
             param.Add("@Artist", contentModel.Artist);
             param.Add("@Description", contentModel.Description);
+            param.Add("@DateMod", DateTime.Now);
             DapperORM.ExecuteWithoutReturn("ContentUpdate", param);
 
             return RedirectToAction("ContentManager");

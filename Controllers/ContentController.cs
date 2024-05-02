@@ -113,6 +113,10 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.ExecuteNonQuery();
                     sqlconn.Close();
                 }
+                else
+                {
+                    return RedirectToAction("UploadFailed");
+                }
 
                 return RedirectToAction("ContentManager");
             }

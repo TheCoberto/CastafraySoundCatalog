@@ -82,7 +82,6 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
                     sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.ExecuteNonQuery();
-                    file.SaveAs(filePath);
                     sqlconn.Close();
                 }
             }

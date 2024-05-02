@@ -10,12 +10,16 @@ using System.Web.Mvc;
 using static CastafraySoundCatalog.Globals;
 using static CastafraySoundCatalog.Helpers;
 using CastafraySoundCatalog.Services;
+using AngleSharp;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
+using System.Configuration;
 
 namespace CastafraySoundCatalog.Controllers
 {
     public class ContentController : Controller
     {
-        public Random rng = new Random();
+        Random rng = new Random();
 
         public ActionResult ContentViewAll()
         {
@@ -90,7 +94,6 @@ namespace CastafraySoundCatalog.Controllers
                     sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
                     sqlcomm.Parameters.AddWithValue("@BlobUrl", blobUrl);
                     sqlcomm.ExecuteNonQuery();
-                    file.SaveAs(filePath);
                     sqlconn.Close();
                 }
 

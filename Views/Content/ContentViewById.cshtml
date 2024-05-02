@@ -15,11 +15,11 @@
     <div class="col-md-10">
         @if (Model.FileExtension == ".jpg" || Model.FileExtension == ".jpeg" || Model.FileExtension == ".gif" || Model.FileExtension == ".png")
         {
-            <img src="@Url.Content(Model.FileName)" />
+            <img src="@Url.Content(Model.BlobUrl)" />
         }
         @if (Model.FileExtension == ".mp4" || Model.FileExtension == ".avi" || Model.FileExtension == ".mov")
         {
-            <video autoplay controls src="@Url.Content(Model.FileName)"></video>
+            <video autoplay controls src="@Url.Content(Model.BlobUrl)"></video>
         }
     </div>
 </div>

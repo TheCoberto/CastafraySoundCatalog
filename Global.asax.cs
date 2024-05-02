@@ -22,9 +22,13 @@ namespace CastafraySoundCatalog
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var secretClient = new SecretClient(new Uri("https://contentconnectionstring.vault.azure.net/"), new DefaultAzureCredential());
-            var secret = secretClient.GetSecret("ConnectionString");
+            var connectionString = secretClient.GetSecret("ConnectionString");
+            var azureStorageAccountName = secretClient.GetSecret("StorageAccountName");
+            var azureStorageAccountKey = secretClient.GetSecret("StorageAccountKey");
 
-            ConnectionString = secret.Value.Value;
+            ConnectionString = connectionString.Value.Value;
+            AzureStorageAccountName = azureStorageAccountName.Value.Value;
+            AzureStorageAccountKey = azureStorageAccountKey.Value.Value;
         }
     }
 }

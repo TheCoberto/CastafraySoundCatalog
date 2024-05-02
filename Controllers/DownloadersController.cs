@@ -2,6 +2,7 @@
 using System.IO;
 using System.Web.Mvc;
 using System.Diagnostics;
+using System.Web;
 
 namespace CastafraySoundCatalog.Controllers
 {
@@ -18,11 +19,11 @@ namespace CastafraySoundCatalog.Controllers
         public ActionResult DownloadAudio(string name, string url)
         {
             var fileName = $"{name}.mp3";
-            var outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Downloads", fileName);
+            var outputPath = Path.Combine(HttpRuntime.AppDomainAppPath, "Downloads", fileName);
 
             var processStartInfo = new ProcessStartInfo
             {
-                FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "yt-dlp.exe"),
+                FileName = Path.Combine(HttpRuntime.AppDomainAppPath, "yt-dlp.exe"),
                 Arguments = $"-x --audio-format mp3 -o \"{outputPath}\" {url}",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -48,11 +49,11 @@ namespace CastafraySoundCatalog.Controllers
         public ActionResult DownloadVideo(string name, string url)
         {
             var fileName = $"{name}.mp4";
-            var outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Downloads", fileName);
+            var outputPath = Path.Combine(HttpRuntime.AppDomainAppPath, "Downloads", fileName);
 
             var processStartInfo = new ProcessStartInfo
             {
-                FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "yt-dlp.exe"),
+                FileName = Path.Combine(HttpRuntime.AppDomainAppPath, "yt-dlp.exe"),
                 Arguments = $"-f bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4 -o \"{outputPath}\" {url}",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -68,7 +69,7 @@ namespace CastafraySoundCatalog.Controllers
 
                 if (process.ExitCode == 0 && System.IO.File.Exists(outputPath))
                 {
-                    return File(outputPath, "video/mp4", fileName);
+                    return File(fileName, "video/mp4", fileName);
                 }
             }
 

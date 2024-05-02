@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ContentModel>
+
+@{
+    ViewBag.Title = "Video Manager";
+}
+
+<h2>Video Manager</h2>
+
+<h4>Total Videos: @Model.Count()</h4>
+
+<p>
+    <u>@Html.ActionLink("Create New Record", "ContentAdd", "Content")</u>
+</p>
+<table class="table table-condensed">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model.OrderBy(i => i.Title))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ContentViewById", new { id = item.ContentId })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ContentEdit", new { id = item.ContentId }) |
+                @Html.ActionLink("Delete", "ContentDelete", new { id = item.ContentId })
+            </td>
+        </tr>
+    }
+</table>

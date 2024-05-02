@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CastafraySoundCatalog.Models.SoundModel>
+﻿@model IEnumerable<CastafraySoundCatalog.Models.ContentModel>
 
 @{
     ViewBag.Title = "Sound Manager";
@@ -9,7 +9,7 @@
 <h4>Total Sounds: @Model.Count()</h4>
 
 <p>
-    <u>@Html.ActionLink("Create New Record", "SoundAdd", "Sounds")</u>
+    <u>@Html.ActionLink("Create New Record", "ContentAdd", "Content")</u>
 </p>
 <p>
     <u>@Html.ActionLink("My Music", "MyMusic", "Sounds")</u>
@@ -43,27 +43,27 @@
                 @if (item.FileExtension == ".wav")
                 {
                     <audio controls>
-                        <source src="~/sound/@Url.Content(item.FileName)" type="audio/wav">
+                        <source src="@Url.Content(item.BlobUrl)" type="audio/wav">
                     </audio>
                 }
                 @if (item.FileExtension == ".mp3")
                 {
                     <audio controls>
-                        <source src="~/sound/@Url.Content(item.FileName)" type="audio/mp3">
+                        <source src="@Url.Content(item.BlobUrl)" type="audio/mp3">
                     </audio>
                 }
                 @if (item.FileExtension == ".ogg")
                 {
                     <audio controls>
-                        <source src="~/sound/@Url.Content(item.FileName)" type="audio/ogg">
+                        <source src="@Url.Content(item.FileName)" type="audio/ogg">
                     </audio>
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "SoundEdit", new { id = item.SoundId })
+                @Html.ActionLink("Edit", "ContentEdit", new { id = item.ContentId })
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.SoundId })
+                @Html.ActionLink("Delete", "ContentDelete", new { id = item.ContentId })
             </td>
         </tr>
     }

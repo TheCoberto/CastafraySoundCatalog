@@ -20,14 +20,14 @@
     {
         if (content.FileExtension == ".jpg" || content.FileExtension == ".jpeg" || content.FileExtension == ".png" || content.FileExtension == ".gif")
         {
-            <h4>@content.Description</h4>
+            <h4>@content.Title</h4>
             <img width="650" height="650" src="@Url.Content(content.BlobUrl)">
             <br />
             <hr />
         }
         if (content.FileExtension == ".mov" || content.FileExtension == ".avi" || content.FileExtension == ".mp4")
         {
-            <h4>@content.Description</h4>
+            <h4>@content.Title</h4>
             <video width="500" height="400" controls>
                 <source src="@Url.Content(content.BlobUrl)" />
             </video>

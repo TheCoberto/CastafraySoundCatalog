@@ -240,21 +240,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
-    <Compile Include="Controllers\SoundsController.cs" />
-    <Compile Include="Controllers\VideosController.cs" />
-    <Compile Include="Controllers\DownloadersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Models\DapperORM.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ContentModel.cs" />
-    <Compile Include="Models\SoundModel.cs" />
-    <Compile Include="Models\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AzureBlobService.cs" />
   </ItemGroup>
@@ -307,24 +300,22 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Sounds\SoundManager.cshtml" />
+    <Content Include="Views\Content\SoundManager.cshtml" />
     <Content Include="Views\Sounds\SoundEdit.cshtml" />
     <Content Include="Views\Sounds\SoundAdd.cshtml" />
     <Content Include="Views\Images\ImageAdd.cshtml" />
     <Content Include="Views\Images\ImageViewAll.cshtml" />
     <Content Include="Views\Videos\VideoAdd.cshtml" />
     <Content Include="Views\Videos\VideoViewAll.cshtml" />
-    <Content Include="Views\Images\ImageManager.cshtml" />
+    <Content Include="Views\Content\ImageManager.cshtml" />
     <Content Include="Views\Images\ImageViewById.cshtml" />
-    <Content Include="Views\Videos\VideoManager.cshtml" />
+    <Content Include="Views\Content\VideoManager.cshtml" />
     <Content Include="Views\Videos\VideoViewById.cshtml" />
     <Content Include="Views\Videos\VideoEdit.cshtml" />
     <Content Include="Views\Shared\UploadFailed.cshtml" />
     <Content Include="Views\Images\ImageEdit.cshtml" />
     <Content Include="Views\Images\ImageViewAllShuffled.cshtml" />
     <Content Include="Views\Sounds\MyMusic.cshtml" />
-    <Content Include="Views\Downloaders\AudioDownloader.cshtml" />
-    <Content Include="Views\Downloaders\VideoDownloader.cshtml" />
     <Content Include="Views\Content\ContentManager.cshtml" />
     <Content Include="Views\Content\ContentEdit.cshtml" />
     <Content Include="Views\Content\ContentAdd.cshtml" />
@@ -335,11 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="contentdump\" />
-    <Folder Include="Downloads\" />
-    <Folder Include="image\" />
-    <Folder Include="sound\" />
-    <Folder Include="video\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

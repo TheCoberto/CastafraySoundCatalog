@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-
-namespace CastafraySoundCatalog
+﻿namespace CastafraySoundCatalog
 {
     public static class Globals
     {

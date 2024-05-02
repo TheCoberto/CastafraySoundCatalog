@@ -10,10 +10,6 @@ using System.Web.Mvc;
 using static CastafraySoundCatalog.Globals;
 using static CastafraySoundCatalog.Helpers;
 using CastafraySoundCatalog.Services;
-using AngleSharp;
-using Azure.Security.KeyVault.Secrets;
-using Azure.Identity;
-using System.Configuration;
 
 namespace CastafraySoundCatalog.Controllers
 {
@@ -29,6 +25,28 @@ namespace CastafraySoundCatalog.Controllers
         public ActionResult ContentManager()
         {
             return View(DapperORM.ReturnList<ContentModel>("ContentSelectAll"));
+        }
+
+        public ActionResult ImageManager()
+        {
+            var allFiles = DapperORM.ReturnList<ContentModel>("ContentSelectAll");
+            var images = allFiles.Where(x => ImageFileExtensions.Any(ext => ext == x.FileExtension));
+
+            return View(images);
+        }
+        public ActionResult VideoManager()
+        {
+            var allFiles = DapperORM.ReturnList<ContentModel>("ContentSelectAll");
+            var videos = allFiles.Where(x => VideoFileExtensions.Any(ext => ext == x.FileExtension));
+
+            return View(videos);
+        }
+        public ActionResult SoundManager()
+        {
+            var allFiles = DapperORM.ReturnList<ContentModel>("ContentSelectAll");
+            var sounds = allFiles.Where(x => SoundFileExtensions.Any(ext => ext == x.FileExtension));
+
+            return View(sounds);
         }
 
         public ActionResult ContentViewAllShuffled()
@@ -49,7 +67,7 @@ namespace CastafraySoundCatalog.Controllers
             {
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@ContentId", id);
-                return View(DapperORM.ReturnList<ContentModel>("ContentSelectById", param).FirstOrDefault<ContentModel>());
+                return View(DapperORM.ReturnList<ContentModel>("ContentSelectById", param).FirstOrDefault());
             }
         }
 
@@ -62,7 +80,7 @@ namespace CastafraySoundCatalog.Controllers
         }
 
         [HttpPost]
-        public ActionResult ContentAdd(HttpPostedFileBase file, string description)
+        public ActionResult ContentAdd(HttpPostedFileBase file, string description, string title, string artist)
         {
             if (file == null || file.FileName.Length >= 75 || file.FileName.Contains("#") || file.ContentLength <= 0)
             {
@@ -78,20 +96,19 @@ namespace CastafraySoundCatalog.Controllers
                     var blobService = new AzureBlobService();
                     var blobUrl = blobService.UploadFile(file);
                     int fileSize = file.ContentLength;
-                    DateTime dateAdded = DateTime.Now;
-                    string filePath = Path.Combine(Server.MapPath("~/contentdump"), fileName);
+                    DateTime currentDateTime = DateTime.Now;
                     SqlConnection sqlconn = new SqlConnection(ConnectionString);
                     SqlCommand sqlcomm = new SqlCommand("ContentInsert", sqlconn);
                     sqlcomm.CommandType = CommandType.StoredProcedure;
                     sqlconn.Open();
                     sqlcomm.Parameters.AddWithValue("@FileName", fileName);
-                    sqlcomm.Parameters.AddWithValue("@Title", fileName); // update this
-                    sqlcomm.Parameters.AddWithValue("@Artist", fileName); // update this
+                    sqlcomm.Parameters.AddWithValue("@Title", title);
+                    sqlcomm.Parameters.AddWithValue("@Artist", artist);
                     sqlcomm.Parameters.AddWithValue("@Description", description);
                     sqlcomm.Parameters.AddWithValue("@FileExtension", fileExt);
-                    sqlcomm.Parameters.AddWithValue("@FilePath", filePath);
                     sqlcomm.Parameters.AddWithValue("@FileSize", fileSize);
-                    sqlcomm.Parameters.AddWithValue("@DateAdded", dateAdded);
+                    sqlcomm.Parameters.AddWithValue("@DateAdded", currentDateTime);
+                    sqlcomm.Parameters.AddWithValue("@DateMod", currentDateTime);
                     sqlcomm.Parameters.AddWithValue("@BlobUrl", blobUrl);
                     sqlcomm.ExecuteNonQuery();
                     sqlconn.Close();
@@ -120,7 +137,7 @@ namespace CastafraySoundCatalog.Controllers
             {
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@ContentId", id);
-                return View(DapperORM.ReturnList<ContentModel>("ContentSelectById", param).FirstOrDefault<ContentModel>());
+                return View(DapperORM.ReturnList<ContentModel>("ContentSelectById", param).FirstOrDefault());
             }
         }
 
@@ -129,6 +146,8 @@ namespace CastafraySoundCatalog.Controllers
         {
             DynamicParameters param = new DynamicParameters();
             param.Add("@ContentId", contentModel.ContentId);
+            param.Add("@Title", contentModel.Title);
+            param.Add("@Artist", contentModel.Artist);
             param.Add("@Description", contentModel.Description);
             DapperORM.ExecuteWithoutReturn("ContentUpdate", param);
 

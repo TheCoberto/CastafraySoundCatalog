@@ -3,5 +3,55 @@
 }
 
 <div class="jumbotron">
-    <p><a href="~/Content/ContentAdd">Upload Content</a></p>
+    <p></p>
 </div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #dashboard {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .tile {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Application name and navigation menu -->
+    </header>
+    <main>
+        <div id="dashboard">
+            <a href="/Content/ContentAdd"><div class="tile">Upload</div></a>
+            <a href="/Content/ContentManager"><div class="tile">View Library</div></a>
+        </div>
+    </main>
+    <footer>
+        <!-- Links to settings and user profiles -->
+    </footer>
+</body>
+</html>

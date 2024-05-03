@@ -301,28 +301,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Content\SoundManager.cshtml" />
-    <Content Include="Views\Sounds\SoundEdit.cshtml" />
-    <Content Include="Views\Sounds\SoundAdd.cshtml" />
-    <Content Include="Views\Images\ImageAdd.cshtml" />
-    <Content Include="Views\Images\ImageViewAll.cshtml" />
-    <Content Include="Views\Videos\VideoAdd.cshtml" />
-    <Content Include="Views\Videos\VideoViewAll.cshtml" />
     <Content Include="Views\Content\ImageManager.cshtml" />
-    <Content Include="Views\Images\ImageViewById.cshtml" />
     <Content Include="Views\Content\VideoManager.cshtml" />
-    <Content Include="Views\Videos\VideoViewById.cshtml" />
-    <Content Include="Views\Videos\VideoEdit.cshtml" />
     <Content Include="Views\Shared\UploadFailed.cshtml" />
-    <Content Include="Views\Images\ImageEdit.cshtml" />
-    <Content Include="Views\Images\ImageViewAllShuffled.cshtml" />
-    <Content Include="Views\Sounds\MyMusic.cshtml" />
     <Content Include="Views\Content\ContentManager.cshtml" />
     <Content Include="Views\Content\ContentEdit.cshtml" />
     <Content Include="Views\Content\ContentAdd.cshtml" />
     <Content Include="Views\Content\ContentViewAll.cshtml" />
     <Content Include="Views\Content\ContentViewById.cshtml" />
     <Content Include="Views\Content\ContentViewAllShuffled.cshtml" />
-    <Content Include="Views\Content\Storage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

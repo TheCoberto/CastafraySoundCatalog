@@ -40,22 +40,11 @@
                 @Html.DisplayFor(modelItem => item.Artist)
             </td>
             <td>
-                @if (item.FileExtension == ".wav")
+                @if (Helpers.IsSound(item.FileExtension))
                 {
+                    string soundFileExtension = item.FileExtension.TrimStart('.');
                     <audio controls>
-                        <source src="@Url.Content(item.BlobUrl)" type="audio/wav">
-                    </audio>
-                }
-                @if (item.FileExtension == ".mp3")
-                {
-                    <audio controls>
-                        <source src="@Url.Content(item.BlobUrl)" type="audio/mp3">
-                    </audio>
-                }
-                @if (item.FileExtension == ".ogg")
-                {
-                    <audio controls>
-                        <source src="@Url.Content(item.FileName)" type="audio/ogg">
+                        <source src="@Url.Content(item.BlobUrl)" type="audio/@soundFileExtension">
                     </audio>
                 }
             </td>

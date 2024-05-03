@@ -4,6 +4,11 @@
     ViewBag.Title = "Content Edit";
 }
 
+<div>
+    <hr />
+    @Html.ActionLink("Content Manager", "ContentManager")
+    <hr />
+</div>
 <center>
     <h2>Content Editor</h2>
     <hr />
@@ -42,10 +47,6 @@
         </div>
     }
 </center>
-
-<div class="form-group">
-    @Html.ActionLink("Back to List", "ContentManager")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

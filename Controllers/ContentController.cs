@@ -15,8 +15,6 @@ namespace CastafraySoundCatalog.Controllers
 {
     public class ContentController : Controller
     {
-        Random rng = new Random();
-
         public ActionResult ContentViewAll()
         {
             return View(DapperORM.ReturnList<ContentModel>("ContentSelectAll"));
@@ -51,12 +49,11 @@ namespace CastafraySoundCatalog.Controllers
 
         public ActionResult ContentViewAllShuffled()
         {
-            return View(DapperORM.ReturnList<ContentModel>("ContentSelectAll"));
-        }
+            Random random = new Random();
+            var allFiles = DapperORM.ReturnList<ContentModel>("ContentSelectAll");
+            var allFiledRandomized = allFiles.OrderBy(r =>random.Next());
 
-        public ActionResult Storage()
-        {
-            return View();
+            return View(allFiledRandomized);
         }
 
         public ActionResult ContentViewById(int id = 0)

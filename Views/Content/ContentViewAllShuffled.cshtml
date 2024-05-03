@@ -18,29 +18,33 @@
 <p>
     <u>@Html.ActionLink("Content Manager", "ContentManager", "Content")</u>
 </p>
-@{
-    var rnd = new Random();
-    var randomized = Model.OrderBy(i => rnd.Next());
-}
 
 <center>
-    @foreach (var content in randomized)
+    @foreach (var content in Model)
     {
-        if (content.FileExtension == ".jpg" || content.FileExtension == ".jpeg" || content.FileExtension == ".png" || content.FileExtension == ".gif")
+        if (Helpers.IsImage(content.FileExtension))
         {
-            <h4>@content.Description</h4>
+            <h4>@content.Title</h4>
             <img width="650" height="650" src="@Url.Content(content.BlobUrl)">
             <br />
             <hr />
         }
-        if (content.FileExtension == ".mov" || content.FileExtension == ".avi" || content.FileExtension == ".mp4")
+        if (Helpers.IsVideo(content.FileExtension))
         {
-            <h4>@content.Description</h4>
+            <h4>@content.Title</h4>
             <video width="500" height="400" controls>
                 <source src="@Url.Content(content.BlobUrl)" />
             </video>
             <br />
             <hr />
+        }
+        if (Helpers.IsSound(content.FileExtension))
+        {
+            <h4>@content.Title</h4>
+            string soundFileExtension = content.FileExtension.TrimStart('.');
+            <audio controls>
+                <source src="@Url.Content(content.BlobUrl)" type="audio/@soundFileExtension">
+            </audio>
         }
     }
 </center>

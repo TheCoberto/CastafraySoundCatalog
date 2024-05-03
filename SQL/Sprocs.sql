@@ -1,6 +1,6 @@
 USE Content
 
-IF EXISTS (select * from sys.procedures where name = 'ContentDeleteById')
+IF EXISTS (SELECT * FROM SYS.PROCEDURES WHERE NAME = 'ContentDeleteById')
 BEGIN
 	DROP PROCEDURE ContentDeleteById
 END
@@ -16,18 +16,18 @@ BEGIN
 END
 GO
 
-IF EXISTS (select * from sys.procedures where name = 'ContentUpdate')
+IF EXISTS (SELECT * FROM SYS.PROCEDURES WHERE NAME = 'ContentUpdate')
 BEGIN
 	DROP PROCEDURE ContentUpdate
 END
 GO
 
 CREATE OR ALTER PROCEDURE [dbo].[ContentUpdate] (
-	@ContentId int,
-	@Title varchar(MAX),
-	@Description varchar(MAX),
-	@Artist varchar(MAX),
-	@DateMod datetime
+	@ContentId INT,
+	@Title VARCHAR(MAX),
+	@Description VARCHAR(MAX),
+	@Artist VARCHAR(MAX),
+	@DateMod DATETIME
 ) AS
 BEGIN
 	UPDATE Content
@@ -36,14 +36,14 @@ BEGIN
 END
 GO
 
-IF EXISTS (select * from sys.procedures where name = 'ContentSelectById')
+IF EXISTS (SELECT * FROM SYS.PROCEDURES WHERE NAME = 'ContentSelectById')
 BEGIN
 	DROP PROCEDURE ContentSelectById
 END
 GO
 
 CREATE OR ALTER PROCEDURE [dbo].[ContentSelectById] (
-	@ContentId int
+	@ContentId INT
 ) AS
 BEGIN
 	SELECT *
@@ -52,7 +52,7 @@ BEGIN
 END
 GO
 
-IF EXISTS (select * from sys.procedures where name = 'ContentSelectAll')
+IF EXISTS (SELECT * FROM SYS.PROCEDURES WHERE NAME = 'ContentSelectAll')
 BEGIN
 	DROP PROCEDURE ContentSelectAll
 END
@@ -65,22 +65,22 @@ BEGIN
 END
 GO
 
-IF EXISTS (select * from sys.procedures where name = 'ContentInsert')
+IF EXISTS (SELECT * FROM SYS.PROCEDURES WHERE NAME = 'ContentInsert')
 BEGIN
 	DROP PROCEDURE ContentInsert
 END
 GO
 
 CREATE OR ALTER PROCEDURE [dbo].[ContentInsert] (
-	@Title varchar(MAX),
-	@Description varchar(MAX),
-	@Artist varchar(MAX),
-	@FileExtension varchar(MAX),
-	@FileName varchar(MAX),
-	@FileSize int,
-	@DateAdded datetime,
-	@DateMod datetime,
-	@BlobUrl varchar(MAX)
+	@Title VARCHAR(MAX),
+	@Description VARCHAR(MAX),
+	@Artist VARCHAR(MAX),
+	@FileExtension VARCHAR(MAX),
+	@FileName VARCHAR(MAX),
+	@FileSize INT,
+	@DateAdded DATETIME,
+	@DateMod DATETIME,
+	@BlobUrl VARCHAR(MAX)
 ) AS
 BEGIN
 	INSERT INTO Content (Title, [Description], Artist, [FileName], FileExtension, FileSize, DateAdded, DateMod, BlobUrl)
